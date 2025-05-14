@@ -1,10 +1,12 @@
 # Overview
 
-This repository contains an implementation of the **Continuous Recognition Task**, a commonly used paradigm to measure the memorability of images, built using [jsPsych](https://www.jspsych.org/). It is based on the original JavaScript implementation by Dr. Wilma Bainbridge (available [here](https://www.wilmabainbridge.com/makeexperiments.html)) and extends it with additional functionality and flexibility.
+This repository contains an implementation of the **Continuous Recognition Task**, a commonly used paradigm to measure the memorability of images, built using [jsPsych](https://www.jspsych.org/) (version 6.3.1). It is based on the original JavaScript implementation by Dr. Wilma Bainbridge (available [here](https://www.wilmabainbridge.com/makeexperiments.html)) and extends it with additional functionality and flexibility.
 
 # Quick Start Example
 
-You can try out an example version using the HTML file `example/example.html`. The example stimuli are from the [One Million Impressions (OMI) Dataset](https://github.com/jcpeterson/omi). All images are synthetic faces generated using [StyleGAN2](https://github.com/NVlabs/stylegan2) and do not depict real individuals.
+You can try out an example version of the task by visiting [here](https://nwrim.github.io/continuous_recognition_task_jsPsych/example/example.html), or by opening the HTML file `example/example.html` after cloning the repository. This example file can also serve as a good starting point for configuring the task to fit your needs (see parameter descriptions below).
+
+The example stimuli are from the [One Million Impressions (OMI) Dataset](https://github.com/jcpeterson/omi). All images are synthetic faces generated using [StyleGAN2](https://github.com/NVlabs/stylegan2) and do not depict real individuals.
 
 # Parameters for buildTimeline()
 
@@ -123,8 +125,12 @@ There are two methods for determining **how target images are repeated**:
 * The rest of the code described below assumes that the arrays (except `timeline`) are converted to strings (via `toString()`) for ease of saving the output.
 
 # Validating Interval Structure from Parameters
-
 You can verify that your chosen parameters produce the expected intervals using functions in `jspsych-continuous-recognition-task-validation.js`. An example html file to do this is at `example/validation.html`.
+
+# Saving the Data
+This repository does not include built-in functionality for saving experiment output, as saving methods can vary significantly depending on your deployment environment (e.g., local, server, cloud platform).
+
+In our lab, we typically convert the relevant output arrays to strings (see above) and save them in CSV format, with one row per participant. You are free to adapt this approach or implement your own saving mechanism depending on your needs (e.g., using jsPsych.data.get().csv(), sending data to a backend server, or integrating with survey platforms).
 
 # Transforming the data to BIDS format
 * `scripts/02_to_bids.py` transforms the experiment output into a human-readable, trial-level `.tsv` file that follows the [BIDS](https://bids.neuroimaging.io/index.html) format. See the README in the `scripts/` folder for more details.
