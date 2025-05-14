@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Trial Numbers Calculator</title>
+  <link rel="stylesheet" href="scripts.css">
+  <script src="../jspsych-continuous-recognition-task.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Trial Numbers Calculator</h1>
+    <form id="trialForm">
+      <label for="targetNum">Number of Target Images:</label>
+      <input type="number" id="targetNum" name="targetNum" min="0" required>
+
+      <label for="imgBlockSize">Trials Per Image Block:</label>
+      <input type="number" id="imgBlockSize" name="imgBlockSize" min="0" required>
+
+      <label for="firstRepeatDelay">First Repeat Delay (blocks):</label>
+      <input type="number" id="firstRepeatDelay" name="firstRepeatDelay" min="0" required>
+
+      <label for="vigilanceInterval">Vigilance Interval (blocks):</label>
+      <input type="number" id="vigilanceInterval" name="vigilanceInterval" min="1" required>
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    // When the form is submitted, read the input values and use the externally loaded
+    // calculateTrialNumbers function.
+    document.getElementById('trialForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Get input values.
+      var targetNum = parseInt(document.getElementById('targetNum').value, 10);
+      var imgBlockSize = parseInt(document.getElementById('imgBlockSize').value, 10);
+      var firstRepeatDelay = parseInt(document.getElementById('firstRepeatDelay').value, 10);
+      var vigilanceInterval = parseInt(document.getElementById('vigilanceInterval').value, 10);
+      
+      // Calculate the trial numbers using the external function.
+      var results = calculateTrialNumbers(targetNum, imgBlockSize, firstRepeatDelay, vigilanceInterval);
+      
+      // Calculate combined target + filler trials.
+      var sameSourceTotal = results.target + results.filler;
+      
+      // Create the messages.
+      var sameSourceMessage = `If you are using the same source for target and filler images (i.e., <code>targetImgSrc === fillerImgSrc</code>), you need at least <strong>${sameSourceTotal}</strong> images in <code>targetImgLst</code>.`;
+      
+      var differentSourceMessage = `If the target image source is not the same as the filler, you need at least <strong>${results.target}</strong> images in <code>targetImgLst</code> and at least <strong>${results.filler}</strong> images in <code>fillerImgLst</code>.`;
+      
+      // Output all trial results and messages.
+      document.getElementById('output').innerHTML = `
+        <h2>Results</h2>
+        <p><strong>Total Trials:</strong> ${results.total}</p>
+        <p><strong>Target Trials:</strong> ${results.target}</p>
+        <p><strong>Repeat Trials:</strong> ${results.repeat}</p>
+        <p><strong>Filler Trials:</strong> ${results.filler}</p>
+        <p><strong>Vigilance Trials:</strong> ${results.vigilance}</p>
+        <p>${sameSourceMessage}</p>
+        <p>${differentSourceMessage}</p>
+      `;
+    });
+  </script>
+</body>
+</html>

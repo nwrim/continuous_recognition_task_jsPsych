@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sampleItems</title>
+    <link rel="stylesheet" type="text/css" href="./unit_test.css">
+    <script src="../jspsych-continuous-recognition-task.js"></script>
+    <script src="./unit_test.js"></script>
+    <script>
+        function runSample() {
+            const TARGETIMGLST = range(1, 1000).map(x => x + '.jpg');
+            const FILLERIMGLST = range(1001, 2000).map(x => x + '.jpg');
+            const TARGETSRC = 'https://someurl.com/';
+            const FILLERSRC0 = 'https://someurl.com/';
+            const FILLERSRC1 = 'https://someotherurl.com/';
+            
+            var [target0, filler0] = sampleTargetFiller(TARGETSRC, FILLERSRC0, TARGETIMGLST, FILLERIMGLST, 5, 10);
+            var [target1, filler1] = sampleTargetFiller(TARGETSRC, FILLERSRC1, TARGETIMGLST, FILLERIMGLST, 3, 8);
+
+            document.getElementById("function-call-1").innerHTML = "var [target0, filler0] = sampleTargetFiller(TARGETIMGLST, FILLERIMGLST, TARGETSRC, FILLERSRC0)";
+            document.getElementById("result-1").innerHTML = JSON.stringify(target0) + ', ' + JSON.stringify(filler0);
+
+            document.getElementById("function-call-2").innerHTML = "var [target1, filler1] = sampleTargetFiller(TARGETSRC, FILLERSRC1, TARGETIMGLST, FILLERIMGLST, 3, 8);";
+            document.getElementById("result-2").innerHTML = JSON.stringify(target1) + ', ' + JSON.stringify(filler1);
+
+        }
+    </script>
+
+</head>
+<body onload="runSample()">
+        <h1>sampleTargetFiller(targetImgSrc, fillerImgSrc, targetImgLst, fillerImgLst, targetNum, fillerNum)</h1>
+
+        <pre id="filenames-array">const TARGETIMGLST = range(1, 1000).map(x => x + '.jpg');
+const FILLERIMGLST = range(1001, 2000).map(x => x + '.jpg');
+const TARGETSRC = 'https://someurl.com/';
+const FILLERSRC0 = 'https://someurl.com/';
+const FILLERSRC1 = 'https://someotherurl.com/';</pre>
+
+        <h2>Function Call 1</h2>
+        <pre id="function-call-1"></pre>
+        <h3>Output</h3>
+        <pre id="result-1"></pre>
+
+        <h2>Function Call 2</h2>
+        <pre id="function-call-2"></pre>
+        <h3>Output</h3>
+        <div class="result">
+            <pre id="result-2"></pre>
+        </div>
+
+        <button class="call-button" onclick="runSample()">Run Again</button>
+</body>
+</html>

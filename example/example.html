@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="../jspsych-6.3.1/jspsych.js"></script>
+    <script src="../jspsych-6.3.1/plugins/jspsych-fullscreen.js"></script>
+    <script src="../jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+    <script src="../jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="../jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src='../jspsych-continuous-recognition-task.js'></script>
+    <script src='stimuli.js'></script>
+    <link href="../jspsych-6.3.1/css/continuous_recognition_task.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <span style="font-size: 24px;">
+        <br><br>
+        If you are seeing this message for <span style="color: rgb(255, 0, 0);">
+          <b>more than 5 minutes</b></span>,<br>
+        please screen-capture this screen and send the image to us.
+        <br><br>
+        <span style="font-size: 28px;">We are very sorry for the inconvenience.</span>
+      </span>
+    </div>
+    <div id='display_stage_background'></div>
+    <div id='display_stage'></div>
+  </body>
+  <script>
+    /////////////////////////// PARAMETERS /////////////////////////////
+    // experiment parameters
+    var TARGETNUM = 60;
+    var STIMTIME = 750; // in milliseconds
+    var ISI = 800; // interstimulus interval
+    var IMGBLOCKSIZE = 4; // in trials. The size of image blocks - variable name change: was "delayBetVigilance" in Wilma's original code
+    var FIRSTREPEATDELAY = 5; // in number of blocks. how many blocks has to be passed before we show the first target repeat;
+    var MINREPEATDELAY = 4; // how many blocks has to be passed before we show repeat of that target; in number of blocks (IMGBLOCKSIZE sets number of images in a block) - variable name change: was "trialsBetTargets" in Wilma's original code
+    var VIGILANCEINTERVAL = 4; // How often the vigilance is shown (vigilance trial in every X blocks); in number of blocks
+    var FIXEDORDER = false; // whether to use the original logic from Wilma's code or not
+    var CHOICEKEYS = ['r']
+    var RECORDALLKEYS = true;
+
+    // stimuli parameters
+    var TARGETIMGSRC = './stimuli/target/';
+    var FILLERIMGSRC = './stimuli/filler/';
+    var IMGWIDTH = 512;
+    var IMGHEIGHT = 512;
+
+    var FIXATIONSRC = './stimuli/';
+    var FIXATIONIMG = 'fixation.jpg';
+    var FIXATIONWIDTH = 400;
+    var FIXATIONHEIGHT = 400;
+
+    var INSTRUCTIONS = "<p class=instr>In this task, you will see a stream of images.</p><p class=instr>Press the <b>'r'</b> key any time you see an <b>image</b> you saw before in this task, <br>regardless of whether you saw the same image just before or few minutes ago.</p><p class=instr>Press when you see the <b>image</b> and not during the <b>'+'</b>.</p><p class=instr> <b>WARNING</b>: The images appear and disappear rapidly. Use caution if you are sensitive to such stimulus (e.g., photosensitive).</p><p class=instr>Please press the <b>'r'</b> key to begin.</p>";
+
+    var crt = buildTimeline(TARGETIMGSRC, FILLERIMGSRC, TARGETIMGLST, FILLERIMGLST,
+    TARGETNUM, FIRSTREPEATDELAY, MINREPEATDELAY, IMGBLOCKSIZE, VIGILANCEINTERVAL, FIXEDORDER, FIXATIONSRC, FIXATIONIMG, 
+    INSTRUCTIONS, CHOICEKEYS, RECORDALLKEYS, IMGWIDTH, IMGHEIGHT, FIXATIONWIDTH, FIXATIONHEIGHT, ISI, STIMTIME);
+
+    // initialize jsPsych
+    jsPsych.init({
+			timeline: crt.timeline,
+			display_element: 'display_stage',
+			exclusions: {
+				min_width: 1200,
+				min_height: 700
+			},
+        on_finish: function() {
+          var results = extractResults(jsPsych.data.get().values());
+
+          // convert to strings
+          var imgSeqString = crt.img.toString()
+          var typeSeqString = crt.type.toString()
+          var RTSeqString = results.rt.toString()
+          var keyPressSeqString = results.keyPress.toString()
+
+          var display_element = jsPsych.getDisplayElement();
+          display_element.innerHTML = "Please look at the console log for what the results will look like";
+          console.log("imgSeqString: " + imgSeqString);
+          console.log("typeSeqString: " + typeSeqString);
+          console.log("RTSeqString: " + RTSeqString);
+          console.log("keyPressSeqString: " + keyPressSeqString);
+        },
+    });
+  </script>
+</html>

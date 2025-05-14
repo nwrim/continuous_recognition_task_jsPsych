@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sampleItems</title>
+    <link rel="stylesheet" type="text/css" href="./unit_test.css">
+    <script src="../jspsych-continuous-recognition-task.js"></script>
+    <script src="./unit_test.js"></script>
+    <script>
+        function runSample() {
+            var trialNums = calculateTrialNumbers(60, 4, 5, 1);
+
+            document.getElementById("function-call-1").innerHTML = "var trialNums = calculateTrialNumbers(60, 4, 5, 1);";
+            document.getElementById("result-1").innerHTML = JSON.stringify(trialNums);
+
+            var trialNums = calculateTrialNumbers(60, 4, 8, 4);
+
+            document.getElementById("function-call-2").innerHTML = "var trialNums = calculateTrialNumbers(60, 4, 8, 4);";
+            document.getElementById("result-2").innerHTML = JSON.stringify(trialNums);
+        }
+    </script>
+
+</head>
+<body onload="runSample()">
+        <h1>calculateTrialNumbers(targetNum, imgBlockSize, firstRepeatDelay, vigilanceInterval) </h1>
+
+        <h2>Function Call 1</h2>
+        <pre id="function-call-1"></pre>
+        <h3>Output</h3>
+        <pre id="result-1"></pre>
+
+        <h2>Function Call 2</h2>
+        <pre id="function-call-2"></pre>
+        <h3>Output</h3>
+        <div class="result">
+            <pre id="result-2"></pre>
+        </div>
+
+        <button class="call-button" onclick="runSample()">Run Again</button>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stmuli.js Generator</title>
+    <link rel="stylesheet" href="scripts.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Select the folder containing target images <br> (.png, .jpg, .jpeg)</h2>
+        <input type="file" webkitdirectory directory multiple id="folderInput1">
+
+        <h2>Select the folder containing filler images <br> (.png, .jpg, .jpeg) <br> (Optional; see README.md)</h2>
+        <input type="file" webkitdirectory directory multiple id="folderInput2">
+
+        <button onclick="generateJS()">Generate & Download stimuli.js</button>
+    </div>
+
+    <script>
+        function generateJS() {
+            const input1 = document.getElementById("folderInput1");
+            const input2 = document.getElementById("folderInput2");
+
+            const TARGETIMGLST = Array.from(input1.files)
+                .map(file => file.name)
+                .filter(name => /\.(png|jpe?g)$/i.test(name))
+                .sort((a, b) => a.localeCompare(b));
+
+            const FILLERIMGLST = input2.files.length > 0
+                ? Array.from(input2.files)
+                    .map(file => file.name)
+                    .filter(name => /\.(png|jpe?g)$/i.test(name))
+                    .sort((a, b) => a.localeCompare(b))
+                : [];
+
+            if (TARGETIMGLST.length === 0) {
+                alert("No images found in the target folder.");
+                return;
+            }
+
+            const jsContent = `const TARGETIMGLST = ${JSON.stringify(TARGETIMGLST, null, 2)};
+const FILLERIMGLST = ${JSON.stringify(FILLERIMGLST, null, 2)};
+`;
+
+            const blob = new Blob([jsContent], { type: "application/javascript" });
+            const link = document.createElement("a");
+
+            link.href = URL.createObjectURL(blob);
+            link.download = "stimuli.js";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
