@@ -1,0 +1,63 @@
+/*
+ * CSS for jsPsych experiments.
+ *
+ * This stylesheet provides minimal styling to make jsPsych
+ * experiments look polished without any additional styles.
+ */
+
+@import url("jspsych.css");
+
+
+/* Display elements (this is where the jsPsych elements gets inserted) */
+#display_stage_background {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    z-index: -1;
+}
+
+#display_stage {
+    position: fixed;
+    left: 1vw;
+    top: 1vh;
+    height: 98vh;
+    width: 98vw;
+    background-color: white;
+    z-index: 0;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
+    overflow: auto;
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+}
+
+/* general buttons */
+.jspsych-btn{
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    background-color: #376fc8;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    width: 130px;
+    height: 50px;
+}
+
+.jspsych-btn:hover{
+    background-color: #214278;
+}
+
+.jspsych-btn:disabled{
+    color: white;
+    background-color: #87a8de;
+}
+
+.instr {
+    font-size: 150%;
+    margin-bottom: 1em;
+}

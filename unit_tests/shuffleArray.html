@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>shuffleArray</title>
+    <link rel="stylesheet" type="text/css" href="./unit_test.css">
+    <script src="../jspsych-continuous-recognition-task.js"></script>
+    <script src="./unit_test.js"></script>
+    <script>
+        function runSample() {
+            const arr = range(1, 1000);
+
+            shuffleArray(arr);
+
+            document.getElementById("arr-0").innerHTML = JSON.stringify(arr.slice(0, 10));
+        }
+    </script>
+</head>
+<body onload="runSample()">
+    <h1>shuffleArray(array)</h1>
+
+    <pre id="filenames-array">var arr = range(1, 1000);</pre>
+
+    <h2>Function Call 1</h2>
+    <pre id="function-call-1">shuffleArray(arr);</pre>
+    <h3>Output: arr.slice(1, 10)</h3>
+    <pre id="arr-0"></pre>
+
+    <button class="call-button" onclick="runSample()">Run Again</button>
+</body>
+</html>

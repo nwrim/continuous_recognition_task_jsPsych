@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>shuffleArrays</title>
+    <link rel="stylesheet" type="text/css" href="./unit_test.css">
+    <script src="../jspsych-continuous-recognition-task.js"></script>
+    <script src="./unit_test.js"></script>
+    <script>
+        function runSample() {
+            const arr0 = range(1, 1000);
+            const arr1 = range(1001, 2000);
+            const arr2 = range(2001, 3000);
+            const arr3 = range(3001, 4000);
+
+            shuffleArrays([arr0, arr1, arr2, arr3]);
+
+            document.getElementById("arr-0").innerHTML = JSON.stringify(arr0.slice(0, 10));
+            document.getElementById("arr-1").innerHTML = JSON.stringify(arr1.slice(0, 10));
+            document.getElementById("arr-2").innerHTML = JSON.stringify(arr2.slice(0, 10));
+            document.getElementById("arr-3").innerHTML = JSON.stringify(arr3.slice(0, 10));
+        }
+    </script>
+</head>
+<body onload="runSample()">
+    <h1>shuffleArrays(arrays)</h1>
+
+    <pre id="filenames-array">var arr0 = range(1, 1000);
+var arr1 = range(1001, 2000);
+var arr2 = range(2001, 3000);
+var arr3 = range(3001, 4000);</pre>
+
+    <h2>Function Call 1</h2>
+    <pre id="function-call-1">shuffleArrays([arr0, arr1, arr2, arr3]);</pre>
+    <h3>Output: arr0.slice(1, 10)</h3>
+    <pre id="arr-0"></pre>
+    <h3>Output: arr1.slice(1, 10)</h3>
+    <pre id="arr-1"></pre>
+    <h3>Output: arr2.slice(1, 10)</h3>
+    <pre id="arr-2"></pre>
+    <h3>Output: arr3.slice(1, 10)</h3>
+    <pre id="arr-3"></pre>
+
+
+    <button class="call-button" onclick="runSample()">Run Again</button>
+</body>
+</html>

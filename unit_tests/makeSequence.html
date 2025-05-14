@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sampleItems</title>
+    <link rel="stylesheet" type="text/css" href="./unit_test.css">
+    <script src="../jspsych-continuous-recognition-task.js"></script>
+    <script src="./unit_test.js"></script>
+    <script>
+        function runSample() {
+            const TARGETIMGLST = range(1, 1000).map(x => x + '.jpg');
+            const FILLERIMGLST = range(1001, 2000).map(x => x + '.jpg');
+            const TARGETSRC = 'https://someurl.com/';
+            const FILLERSRC = 'https://someurl.com/';
+
+            const IMGBLOCKSIZE = 4;
+            const FIRSTREPEATDELAY = 8;
+            const REPEATDELAY = 4;
+            const VIGILANCEINTERVAL = 4;
+            const FIXEDORDER = false;
+            
+            var [targetSampled, fillerSampled] = sampleTargetFiller(TARGETSRC, FILLERSRC, TARGETIMGLST, FILLERIMGLST, 60, 136);
+            var sequence = makeSequence(TARGETSRC, FILLERSRC, targetSampled, fillerSampled, FIRSTREPEATDELAY, REPEATDELAY, IMGBLOCKSIZE, VIGILANCEINTERVAL, FIXEDORDER);
+            console.log(sequence.stim, sequence.img, sequence.type);
+
+            document.getElementById("function-call-1").innerHTML = "var sequence = makeImSequence(TARGETSRC, FILLERSRC, targetSampled, fillerSampled, FIRSTREPEATDELAY, REPEATDELAY, IMGBLOCKSIZE, VIGILANCEINTERVAL, FIXEDORDER)";
+            document.getElementById("result-0").innerHTML = JSON.stringify(sequence.stim.slice(0, 4));
+            document.getElementById("result-1").innerHTML = JSON.stringify(sequence.img.slice(0, 4));
+            document.getElementById("result-2").innerHTML = JSON.stringify(sequence.type.slice(0, 4));
+            document.getElementById("result-3").innerHTML = JSON.stringify(sequence.stim.slice(Math.floor(sequence.stim.length / 2) - 4, Math.floor(sequence.stim.length / 2)));
+            document.getElementById("result-4").innerHTML = JSON.stringify(sequence.img.slice(Math.floor(sequence.img.length / 2) - 4, Math.floor(sequence.img.length / 2)));
+            document.getElementById("result-5").innerHTML = JSON.stringify(sequence.type.slice(Math.floor(sequence.type.length / 2) - 4, Math.floor(sequence.type.length / 2)));
+            document.getElementById("result-6").innerHTML = JSON.stringify(sequence.stim.slice(sequence.stim.length - 4, sequence.stim.length));
+            document.getElementById("result-7").innerHTML = JSON.stringify(sequence.img.slice(sequence.img.length - 4, sequence.img.length));
+            document.getElementById("result-8").innerHTML = JSON.stringify(sequence.type.slice(sequence.type.length - 4, sequence.type.length));
+        }
+    </script>
+
+</head>
+<body onload="runSample()">
+        <h1>makeSequence(targetSrc, fillerSrc, targetImgLst, fillerImgLst, firstRepeatDelay, repeatDelay, imgBlockSize, vigilanceInterval, fixedOrder)</h1>
+
+        <pre id="filenames-array">const TARGETIMGLST = range(1, 1000).map(x => x + '.jpg');
+const FILLERIMGLST = range(1001, 2000).map(x => x + '.jpg');
+const TARGETSRC = 'https://someurl.com/';
+const FILLERSRC = 'https://someurl.com/';
+
+const IMGBLOCKSIZE = 4;
+const FIRSTREPEATDELAY = 8;
+const REPEATDELAY = 4;
+const VIGILANCEINTERVAL = 4;
+const FIXEDORDER = false;
+
+var [targetSampled, fillerSampled] = sampleTargetFiller(TARGETSRC, FILLERSRC, TARGETIMGLST, FILLERIMGLST, 60, 136);</pre>
+
+        <h2>Function Call 1</h2>
+        <pre id="function-call-1"></pre>
+        <h3>Output: sequence.stim.slice(0, 4)</h3>
+        <pre id="result-0"></pre>
+        <h3>Output: sequence.img.slice(0, 4)</h3>
+        <pre id="result-1"></pre>
+        <h3>Output: sequence.type.slice(0, 4)</h3>
+        <pre id="result-2"></pre>
+        <h3>Output: sequence.stim.slice(sequence.stim.length % 2 - 4, sequence.stim.length % 2)</h3>
+        <pre id="result-3"></pre>
+        <h3>Output: sequence.img.slice(sequence.img.length % 2 - 4, sequence.img.length % 2)</h3>
+        <pre id="result-4"></pre>
+        <h3>Output: sequence.type.slice(Math.floor(sequence.type.length / 2) - 4, Math.floor(sequence.type.length / 2))</h3>
+        <pre id="result-5"></pre>
+        <h3>Output: sequence.stim.slice(sequence.stim.length - 4, sequence.stim.length)</h3>
+        <pre id="result-6"></pre>
+        <h3>Output: sequence.img.slice(sequence.img.length - 4, sequence.img.length)</h3>
+        <pre id="result-7"></pre>
+        <h3>Output: sequence.type.slice(sequence.type.length - 4, sequence.type.length)</h3>
+        <pre id="result-8"></pre>
+
+        <button class="call-button" onclick="runSample()">Run Again</button>
+</body>
+</html>
