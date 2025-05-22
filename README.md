@@ -139,3 +139,23 @@ In our lab, we typically convert the relevant output arrays to strings (see abov
 # Calculating the memorability metrics from the BIDS formatted data
 * `scripts/03_calculate_metrics.py` processes BIDS-formatted data from the Continuous Recognition Task to compute image-level performance metrics such as hit rate (HR), false alarm rate (FAR), and corrected recognition rate (CRR). It also applies basic exclusion criteria to remove participants with unreliable responses. See the README in the `scripts/` folder for more details.
 * See [here](https://github.com/nwrim/naturalness_compression_memorability/blob/main/data/image_level_measure/set3_memorability.csv) for example output of the script.
+
+# 📚 Citation
+
+If you use this implementation of the continuous recognition task in a scientific publication, we would appreciate citations to the following preprint:
+
+Rim, N., Veillette, J., Lee, S., Kardan, O., Krishnan, S., Bainbridge, W. A., & Berman, M. (2025, May 15). Natural scenes are more compressible and less memorable than human-made scenes. https://doi.org/10.31234/osf.io/xw3ek_v1
+
+Bibtex entry:
+
+```bibtex
+@misc{rim_veillette_lee_kardan_krishnan_bainbridge_berman_2025,
+ title={Natural scenes are more compressible and less memorable than human-made scenes},
+ url={osf.io/preprints/psyarxiv/xw3ek_v1},
+ DOI={10.31234/osf.io/xw3ek_v1},
+ publisher={PsyArXiv},
+ author={Rim, Nakwon and Veillette, John and Lee, Sunny and Kardan, Omid and Krishnan, Sanjay and Bainbridge, Wilma A and Berman, Marc},
+ year={2025},
+ month={May}
+}
+```
